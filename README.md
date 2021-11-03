@@ -30,7 +30,7 @@
   - ROBOBASIC File
 
 ### Mobilenet
-  - Transfer Learning에 활용한 SSD_Mobilenet_v2_fpmlite_320x320 
+  - Transfer Learning에 활용한 SSD_Mobilenet_v2_fpmlite_320x320 Model
   
 
 
