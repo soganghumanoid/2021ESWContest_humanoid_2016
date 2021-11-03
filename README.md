@@ -35,20 +35,20 @@
 ![MobileNet bakbone architecture](https://user-images.githubusercontent.com/88422973/140049002-18f983de-be18-4e57-9bd8-1b9b8724ea04.png)
 
   
-### FlowChart
-  - 전체 순서도
+## FlowChart
+### 전체 순서도
 ![전체순서도](https://user-images.githubusercontent.com/88422973/140042489-64e4ecd9-6e2a-469f-9321-27c0a4fe6e18.png)
 
-  - 문자 구분 순서도
+### 문자 구분 순서도
 ![문자구분순서도](https://user-images.githubusercontent.com/88422973/140042485-af42daa5-e564-4809-b354-132d91f5ef83.png)
 
-  - 라인트레이싱 순서도
+### 라인트레이싱 순서도
 ![라인트레이싱순서도](https://user-images.githubusercontent.com/88422973/140042482-65abfeb6-8bfd-4ab9-b7e4-15a8cacfdc41.png)
 
-  - 라인 복귀 순서도
+### 라인 복귀 순서도
 ![라인복귀순서도](https://user-images.githubusercontent.com/88422973/140042477-59e2456e-8b0e-48ee-a9b9-3b0ca86773d3.png)
 
-  - 시민 구출 순서도
+### 시민 구출 순서도
 ![시민구출순서도](https://user-images.githubusercontent.com/88422973/140042487-c7677e34-fd6f-4170-a6f5-edf7271fc2ac.png)
 
 
@@ -75,5 +75,5 @@
   - HoughLine
 
 ![linepreprocessing](https://user-images.githubusercontent.com/88422973/140049371-d4e7b623-b076-4b05-a56b-05a2b7592ba1.png)
-)
+
 
