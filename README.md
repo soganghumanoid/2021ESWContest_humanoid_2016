@@ -32,6 +32,8 @@
 
 ### Mobilenet
   - Transfer Learning에 활용한 SSD_Mobilenet_v2_fpmlite_320x320 Model
+![MobileNet bakbone architecture](https://user-images.githubusercontent.com/88422973/140049002-18f983de-be18-4e57-9bd8-1b9b8724ea04.png)
+
   
 ### FlowChart
   - 전체 순서도
@@ -64,3 +66,11 @@
 
 ### Detect Arrow and Corner to distinguish Left or Right
 ![20211029_17064470](https://user-images.githubusercontent.com/88422973/140038278-5e73de91-0095-4e56-9f5a-e81704d7a5d2.png)
+
+### Line Detect Preprocessing
+  - GaussianBlur
+  - Convert Color (BGR to HSV)
+  - InRange (upper color limit & lower color limit)
+  - Canny Edge Detection
+  - HoughLine
+  - 
