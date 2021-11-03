@@ -14,7 +14,20 @@
 ### DeepLearning
   - Object Detection 라벨링 및 학습을 위한 Jupyer Notebook File
   - ABCD Classification 학습 폴더
-  - Arrow Corner/Arrow_body Classification 학습 
+  - Arrow Corner/Arrow_body Classification 학습 폴더
+  - ENSW Classification 학습 폴더
+  - 
+### Robot Control
+  - Python Files
+    - main file
+    - functions
+  - Text Files
+    - ENSW, ABCD, Arrow 와 관련된 index
+  - TFLITE Files
+    - TFLite format으로 변환한 ENSW, ABCD, Arrow direction 학습 파일
+
+### Robobasic
+  - ROBOBASIC File
   
 
 
