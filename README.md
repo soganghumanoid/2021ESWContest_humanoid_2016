@@ -12,8 +12,13 @@
 
 ## Contents
 ### DeepLearning
-:
-asdf
+  - Object Detection 라벨링 및 학습을 위한 Jupyer Notebook File
+  - ABCD Classification 학습 폴더
+  - Arrow Corner/Arrow_body Classification 학습 
+  
+
+
+
 
 ## Detect ABCD
 ![20211029_17060220](https://user-images.githubusercontent.com/88422973/140038283-30813b91-fbaf-4c36-a96c-29fc6d38476a.png)
