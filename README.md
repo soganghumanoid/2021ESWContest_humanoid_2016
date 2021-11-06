@@ -4,11 +4,11 @@
 
 ## Team Members
 ### MECHA
-Name|Tasks
+Member|Main Tasks
 ---|---
-Heesung Kim|Humanoid Control
-Wonjong Lee|Computer Vision
-Kuyul Jeong|Data Recognization
+Heesung Kim|Project Manager, Build Environment, Humanoid Control, Serial Communication
+Wonjong Lee|Image Processing Programming, Algorithm Design
+Kuyul Jeong|Image Processing Programming, Text Recognization
 Juho Cha|Programming Assistance
 
 ## Contents
