@@ -4,12 +4,12 @@
 
 ## Team Members
 ### MECHA
-이름|분장
+Name|Tasks
 ---|---
-김희성|
-이원종|
-정구열|
-차주호|
+Heesung Kim|Humanoid Control
+Wonjong Lee|Computer Vision
+Kuyul Jeong|Data Recognization
+Juho Cha|Programming Assistance
 
 ## Contents
 ### DeepLearning
