@@ -8,7 +8,7 @@ Member|Main Tasks
 ---|---
 Heesung Kim|Project Manager, Build Environment, Humanoid Control, Serial Communication
 Wonjong Lee|Image Processing Programming, Algorithm Design
-Kuyeol Jeong|Image Processing Programming, Text Recognization
+Kuyul Jeong|Image Processing Programming, Text Recognization
 Juho Cha|Programming Assistance
 
 ## Contents
