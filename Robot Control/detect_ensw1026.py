@@ -8,6 +8,7 @@ import time
 import sys
 from threading import Thread
 
+
 CAMERA_WIDTH = 640
 CAMERA_HEIGHT = 480
 
@@ -59,7 +60,7 @@ def detect_objects(interpreter, image, threshold):
       results.append(result)
   return results
 
-def main_ensw(cap):
+def main_ensw(cap,serial_port):
     labels = load_labels()
     interpreter = Interpreter('detect_ensw.tflite')
     interpreter.allocate_tensors()
@@ -69,9 +70,11 @@ def main_ensw(cap):
     #cap.set(3,640)
     #cap.set(4,480)
     a=4
-
+    time1 = time.time()
     while True:
         ret, frame = cap.read()
+        time2 = time.time()
+        timer = time2 - time1
         img = cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB), (320,320))
         res = detect_objects(interpreter, img, 0.5)
         print('run')
@@ -99,6 +102,7 @@ def main_ensw(cap):
                 a=3
 
         print(res)
+        
         #cv2.imshow('Pi Feed', frame)
 
         if a==0:
@@ -123,7 +127,9 @@ def main_ensw(cap):
             return a
         elif a==4:
             print('no')
-                    
+        if timer>8:
+            TX_data_py2(serial_port,68)
+            time1 = time.time()            
       
         
 def TX_data_py2(ser, one_byte):  # one_byte= 0~255

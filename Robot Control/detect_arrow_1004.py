@@ -59,7 +59,7 @@ def detect_objects(interpreter, image, threshold):
       results.append(result)
   return results
 
-def main_arrow(cap):
+def main_arrow(cap,serial_port):
     labels = load_labels()
     interpreter = Interpreter('detect_arrow_1004_2.tflite')
     interpreter.allocate_tensors()
@@ -70,8 +70,12 @@ def main_arrow(cap):
     #cap.set(4,480)
     arrow_position = None
     corner_position = None
+    time1 = time.time()
     while cap.isOpened():
         ret, frame = cap.read()
+        time2 = time.time()
+        timer = time2-time1
+        print(timer)
         img = cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB), (320,320))
         res = detect_objects(interpreter, img, 0.5)
         print('run')
@@ -109,6 +113,11 @@ def main_arrow(cap):
                 arrow_direction = 1     #left
                 print('left_')
                 return arrow_direction
+                
+        if timer>5:
+            TX_data_py2(serial_port,68)
+            time1 = time.time()
+            
 
 
 

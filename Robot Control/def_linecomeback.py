@@ -24,39 +24,64 @@ def TX_data_py2(ser, one_byte):  # one_byte= 0~255
 ##print(3333)
 ##global cnt_neck
 ##cnt_neck=0
-def def_linecomback_main(cap,serial_port):
-    corner_chatatda=0
+def def_linecomback_main(cap,serial_port,corner_chatatda):
+    #corner_chatatda=0
     time.sleep(3)
     #TX_data_py2(serial_port,29)
     time.sleep(1)
     cnt_neck1=0
+    balgunhoo=0
+    turn_break360_time1=time.time()
     while True:
-        
+        turn_break360_time2=time.time()
+        print("comback time.time() : ",turn_break360_time2-turn_break360_time1)
+        if (turn_break360_time2-turn_break360_time1)>30:
+            break
         #TX_data_py2(serial_port,58)
         #contour_object(cap)
-        tr=linedetect_b(cap,corner_chatatda)
+        tr=linedetect_b(cap)
+        if tr==15 and tr==20 and tr==59 and tr==2:  #when afterdetect
+            balgunhoo=1
         print("tr :",tr)
         print("corner_chatatda: " ,corner_chatatda)
         if tr!=4:
             corner_chatatda=1
         if tr==4 and corner_chatatda==0:
             TX_data_py2(serial_port,tr)
-        if tr!=2 and corner_chatatda==1: 
-            TX_data_py2(serial_port,tr)
-
-            if tr==4:
+        if tr!=2 and corner_chatatda==1:
+        
+            if tr==4 and balgunhoo==1: 
+                start_time=time.time()
+                while True:
+                    TX_data_py2(serial_port,68)
+                    tr=linedetect_b(cap)
+                    b=time.time()
+                    if (tr!=4):
+                        break
+                    if (b-start_time)>5:
+                        time.sleep(2.5)
+                        TX_data_py2(serial_port,67)
+                        time.sleep(2)
+                        break
+            else:
+                TX_data_py2(serial_port,tr)
+            #if tr==4:
                 #return 2 # continue
-                continue
+                #continue
         if tr==2:
-            if cnt_neck1==0:
-                time.sleep(1)
-                TX_data_py2(serial_port,2)
-                time.sleep(3)
+            if cnt_neck1==0:#necessary
+                time.sleep(2)
+                #TX_data_py2(serial_port,2)
+                TX_data_py2(serial_port,67)
+                time.sleep(2)
+                #TX_data_py2(serial_port,67)
+                #time.sleep(2)
                 
                 
                 for i in range(7):
                     imgi,ret=cap.read()
                     time.sleep(0.01)
+                break
     
                 
             elif cnt_neck1==1:

@@ -20,7 +20,7 @@ def linedetect(cap): #determine left/right
     sumx2=0
 
     cnt=0
-    lower_yellow = (12, 30, 30) #'18,94,140'# hsv image to binary image , adequate value 30
+    lower_yellow = (12,30,80)#1104(14:31)edit(12, 30, 30) #'18,94,140'# hsv image to binary image , adequate value 30
     upper_yellow = (48, 255, 255) #'48,255,255'
 
     frame=cv2.GaussianBlur(img,(5,5),0)
@@ -46,7 +46,7 @@ def linedetect(cap): #determine left/right
         time_1=time.time()####============================
         arr2=[[0 for k in range(5)] for j in range(len(lines))]
         time_2=time.time()####============================
-        print("time_2-time_1",time_2-time_1)#===============================
+        #print("time_2-time_1",time_2-time_1)#===============================
         for i in range(len(lines)):
             for rho, theta in lines[i]: #dot
                 a = np.cos(theta)
@@ -74,9 +74,10 @@ def linedetect(cap): #determine left/right
                 if theta>90 :
                     theta=theta-180
                 arr2[i][4]=theta
+                #cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)#-===============================
         time_3=time.time()####============================
-        print("time_3-time_2",time_3-time_2)#===============================
-        print("len(lines)",len(lines))
+        #print("time_3-time_2",time_3-time_2)#===============================
+        #print("len(lines)",len(lines))
         
         arr2.sort(key=lambda x:x[4])
         #print(arr2)print(avgx1)
@@ -105,24 +106,29 @@ def linedetect(cap): #determine left/right
                         #print(Px,Py)# Px, Py point meet.
                         #print("selected")
                         
-                        if Py >200:         #change point#################
+                        if Py >150:  #170       #change point#################
                             return 50 #17 left 90deg
         time_4=time.time()####============================
-        print("time_4-time_3",time_4-time_3)#===============================
+        #print("time_4-time_3",time_4-time_3)#===============================
         if arr2 is not None:
             if cnt!=0 :  #corner Yes
-                for i in range(0, cnt):     #sum
-                    sum1=sum1+arr2[i][4]
-                    #print(arr2[i][0])
-                    sumx1=sumx1+(arr2[i][0]+arr2[i][2])/2
-                avg1=sum1/cnt
-                avgx1=sumx1/cnt     #average
-
-                for i in range(cnt, len(arr2)):     #sum
-                    sum2=sum2+arr2[i][4]
-                    sumx2=sumx2+(arr2[i][0]+arr2[i][2])/2
-                avg2=sum2/(len(arr2)-cnt)
-                avgx2=sum2/(len(arr2)-cnt)          #average
+                ###1113edit###for i in range(0, cnt):     #sum
+                ###    sum1=sum1+arr2[i][4]
+                ###    #print(arr2[i][0])
+                ###    sumx1=sumx1+(arr2[i][0]+arr2[i][2])/2
+                ###avg1=sum1/cnt
+                ###avgx1=sumx1/cnt     #average
+                avg1=arr2[cnt-1][4]
+                avgx1=(arr2[cnt-1][0]+arr2[cnt-1][2])/2
+                print("arr2[cnt-1][4]:",arr2[cnt-1][4])
+                print("arr2[cnt-1][0]:",(arr2[cnt-1][0]+arr2[cnt-1][2])/2)
+                ###1113edit###for i in range(cnt, len(arr2)):     #sum
+                ###    sum2=sum2+arr2[i][4]
+                ###    sumx2=sumx2+(arr2[i][0]+arr2[i][2])/2
+                avg2=arr2[cnt][4]
+                avgx2=(arr2[cnt][0]+arr2[cnt][2])/2
+                ###avg2=sum2/(len(arr2)-cnt)
+                ###avgx2=sum2/(len(arr2)-cnt)          #average
     
                 if abs(avg1)>abs(avg2):     # vertical ->avg1 , horizontal->avg2
                     tt=avg2
@@ -132,11 +138,14 @@ def linedetect(cap): #determine left/right
                     kk=avgx2
                     avgx2=avgx1
                     avgx1=kk
-                print(len(arr2))
+                if abs(avg1)>75 and abs(avg2) >75:
+                    avg1=0.1
+                    avg2=-91
+                #print(len(arr2))
                 print(avgx1)
                 print ("avg1 avg2 :  ",avg1, avg2)
                 time_5=time.time()####============================
-                print("time_5-time_4",time_5-time_4)#===============================
+                #print("time_5-time_4",time_5-time_4)#===============================
             
             else :  #Corner None
                 for i in range(len(arr2)):
@@ -185,16 +194,21 @@ def linedetect(cap): #determine left/right
                 if avg1<40 and avg1>30:
                     print(-40,"turn")
                     return 3#9
-            elif abs(avg1)>40 and abs(avg1)<45 :
-                if avg1>-45 and avg1<-40:
+            elif abs(avg1)>40 and abs(avg1)<50 :
+                if avg1>-50 and avg1<-40:
                     print(45,"turn")
                     return 1#24
-                if avg1<45 and avg1>40:
+                if avg1<50 and avg1>40:
                     print(-45,"turn")
                     return 3#22
+            elif abs(avg1)>50:
+                return 711#68 horzontalline
             else:
-                return 2
+                print('avg1:',avg1)
+                print('else avgx1:',avgx1)
+                return 69#1107edit###67######2
        # print("------a")
     else:
-        return 2
-
+        #print('else avg1:',avg1)
+        print('else')
+        return 71#edit1110#68#####2

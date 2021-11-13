@@ -4,7 +4,7 @@ import math
 
 
 
-def linedetect_b(cap,corner_chatatda): #determine left/right
+def linedetect_b(cap): #determine left/right
     ret, img = cap.read()
     img=img[0:380,0:640]
     #img_hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV) # cvtColor BGR2HSV
@@ -35,8 +35,8 @@ def linedetect_b(cap,corner_chatatda): #determine left/right
     #cv2.imshow('hsv',img_hsv)
     #cv2.imshow('yellowmask',yellowmask)
     #cv2.imshow('edges',edges)
-    #cv2.imshow('line',img)
-    #cv2.imshow('yellow',yellowmask)
+    cv2.imshow('imgb',img)
+    cv2.imshow('yellowb',yellowmask)
     key=cv2.waitKey(1)
     if key==27:
         return 1
@@ -68,7 +68,7 @@ def linedetect_b(cap,corner_chatatda): #determine left/right
                 if theta>90 :
                     theta=theta-180
                 arr2[i][4]=theta
-                cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
+                #cv2.line(img,(x1,y1),(x2,y2),(0,0,255),2)
         arr2.sort(key=lambda x:x[4])
         #print(arr2)print(avgx1)
 
@@ -140,9 +140,9 @@ def linedetect_b(cap,corner_chatatda): #determine left/right
             print("+20,move")
             return 20
         elif Px>-50 and Px<50 and Px!=0:
-            if Py<230:
+            if Py<200:
                 return 59
-            if Py>=230:
+            if Py>=200:
                 return 2
         elif Px>-50 and Px<50 and Px!=0 :
             return 2

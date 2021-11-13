@@ -59,7 +59,7 @@ def detect_objects(interpreter, image, threshold):
       results.append(result)
   return results
 
-def main_abcd(cap):
+def main_abcd(cap, serial_port):
     labels = load_labels()
     interpreter = Interpreter('detect_abcd_1004_2.tflite')
     interpreter.allocate_tensors()
@@ -69,9 +69,12 @@ def main_abcd(cap):
     #cap.set(3,640)
     #cap.set(4,480)
     a=4
+    time1 = time.time()
 
     while cap.isOpened():
         ret, frame = cap.read()
+        time2 = time.time()
+        timer = time2-time1
         img = cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB), (320,320))
         res = detect_objects(interpreter, img, 0.5)
         print('run')
@@ -88,9 +91,10 @@ def main_abcd(cap):
             cv2.putText(frame,labels[int(result['class_id'])],(xmin, min(ymax, CAMERA_HEIGHT-20)), cv2.FONT_HERSHEY_SIMPLEX, 0.5,(255,255,255),2,cv2.LINE_AA)
 
 
-
+        
             roi_image = frame[ymin:ymax, xmin:xmax].copy()
             hsv_roi = cv2.cvtColor(roi_image, cv2.COLOR_BGR2HSV)
+            
             lower_blue = np.array([110,70,30])
             upper_blue = np.array([130,255,255])
             lower_red = np.array([150, 50, 50])
@@ -98,8 +102,13 @@ def main_abcd(cap):
 
             bluemask_roi = cv2.inRange(hsv_roi, lower_blue, upper_blue)
             redmask_roi = cv2.inRange(hsv_roi, lower_red, upper_red)
+            
+            blue_w=cv2.countNonZero(bluemask_roi)
+            red_w=cv2.countNonZero(redmask_roi)
+            '''
             contours_blue, hierarchy_blue = cv2.findContours(bluemask_roi, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
             contours_red, hierarchy_red = cv2.findContours(redmask_roi, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
+            
             for cnt in contours_blue:
 
                 x_b, y_b, w_b, h_b = cv2.boundingRect(cnt)
@@ -109,6 +118,8 @@ def main_abcd(cap):
                 x_r, y_r, w_r, h_r = cv2.boundingRect(cnt)
                 if(w_r>50):
                     red_w = w_r
+            '''
+            
 
 
 
@@ -135,27 +146,36 @@ def main_abcd(cap):
                 a=3
 
         print(res)
+        
         #cv2.imshow('Pi Feed', frame)
 
         if a==0:
+            print("alphabet_color(blue0 red1) : ",alphabet_color)
             return a, alphabet_color
             cap.release()
             cv2.destroyAllWindows()
 
         elif a==1:
+            print("alphabet_color(blue0 red1) : ",alphabet_color)
             return a, alphabet_color
             cap.release()
             cv2.destroyAllWindows()
 
         elif a==2:
+            print("alphabet_color(blue0 red1) : ",alphabet_color)
             return a, alphabet_color
             cap.release()
             cv2.destroyAllWindows()
 
         elif a==3:
+            print("alphabet_color(blue0 red1) : ",alphabet_color)
             return a, alphabet_color
             cap.release()
             cv2.destroyAllWindows()
+            
+        if timer>5:
+            TX_data_py2(serial_port,68)
+            time1 = time.time()
 
 def TX_data_py2(ser, one_byte):  # one_byte= 0~255
 
