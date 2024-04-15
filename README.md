@@ -53,8 +53,6 @@ Juho Cha|Programming Assistance
 
 
 
-
-
 ## Results
 ### Detect ABCD
 ![20211029_17060220](https://user-images.githubusercontent.com/88422973/140038283-30813b91-fbaf-4c36-a96c-29fc6d38476a.png)
@@ -67,7 +65,7 @@ Juho Cha|Programming Assistance
 ### Detect Arrow and Corner to distinguish Left or Right
 ![20211029_17064470](https://user-images.githubusercontent.com/88422973/140038278-5e73de91-0095-4e56-9f5a-e81704d7a5d2.png)
 
-### Line Detect Preprocessing
+### Line Detect Preprocessing 
   - GaussianBlur
   - Convert Color (BGR to HSV)
   - InRange (upper color limit & lower color limit)
